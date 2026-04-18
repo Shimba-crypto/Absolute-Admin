@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Admin | Official Toolkit</title>
+    <style>
+        :root { --bg: #0d1117; --card: #161b22; --accent: #58a6ff; --text: #c9d1d9; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', monospace; margin: 0; line-height: 1.6; }
+        .hero { text-align: center; padding: 100px 20px; border-bottom: 1px solid #30363d; }
+        h1 { font-size: 3rem; color: var(--accent); margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 50px; max-width: 1000px; margin: auto; }
+        .card { background: var(--card); padding: 20px; border-radius: 8px; border: 1px solid #30363d; }
+        .btn { display: inline-block; padding: 15px 40px; background: var(--accent); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        .btn:hover { background: #1f6feb; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>Absolute Admin</h1>
+        <p>Advanced Windows System Research & Management Toolkit</p>
+        <a href="https://github.com/Shimba-crypto/Absolute-Admin/archive/refs/heads/main.zip" 
+           onclick="window.location.href='downloaded.html'" class="btn">Download Source (.zip)</a>
+    </header>
+
+    <div class="grid">
+        <div class="card"><h3>Process Monitoring</h3><p>Real-time visibility into system processes with safety status identifiers.</p></div>
+        <div class="card"><h3>Safety First</h3><p>The crash-stopper prevents accidental termination of critical Windows services.</p></div>
+        <div class="card"><h3>Module Analysis</h3><p>Forensic inspection of DLLs and EXEs loaded by active processes.</p></div>
+    </div>
+</body>
+</html>

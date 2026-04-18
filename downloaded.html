@@ -3,38 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Animation</title>
+    <title>Download Started | Absolute Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --accent: #58a6ff;
+            --accent-dark: #1f6feb;
+            --text: #c9d1d9;
+            --text-secondary: #8b949e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .loader {
+            overflow: hidden;
             position: relative;
-            display: inline-block;
         }
-        .loader:before {
-            content: 'S';
-            font-size: 5rem;
-            color: #3498db;
-            animation: pulse 1.5s infinite;
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                linear-gradient(to right, rgba(88, 166, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(88, 166, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
         }
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
+
+        .container {
+            background: var(--card);
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 50px 60px;
+            max-width: 560px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, var(--accent), #a5d6ff, var(--accent));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.12;
+            filter: blur(25px);
+        }
+
+        .icon {
+            font-size: 4.8rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: bounceIn 1.2s ease-out;
+        }
+
+        h1 {
+            font-size: 2.7rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #58a6ff, #a5d6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 35px 0;
+            text-align: left;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #21262d;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), #a5d6ff);
+            border-radius: 9999px;
+            transition: width 3.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.6);
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .steps {
+            text-align: left;
+            margin: 40px 0 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+            opacity: 0;
+            animation: fadeInLeft 0.7s forwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.6s; }
+        .step:nth-child(2) { animation-delay: 0.9s; }
+        .step:nth-child(3) { animation-delay: 1.2s; }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            border: 2px solid var(--accent);
+        }
+
+        .step-content h4 {
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        .btn-back:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Animations */
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.6) translateY(80px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-15deg); }
+            60% { transform: scale(1.2) rotate(8deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
-    <div class="loader"></div>
+    <div class="container">
+        <div class="icon">
+            <i class="fas fa-download"></i>
+        </div>
+        
+        <h1>Download Started!</h1>
+        <p class="subtitle">Thank you for choosing Absolute Admin</p>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Downloading Absolute Admin...</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text" id="progress-text">Preparing files...</div>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Extract the ZIP file</h4>
+                    <p>Unzip the downloaded archive to your preferred location.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Install Dependencies</h4>
+                    <p>Open your terminal and run:<br>
+                    <code style="background:#0d1117; padding:6px 10px; border-radius:6px; font-family:monospace; display:block; margin-top:6px;">
+                        pip install psutil ttkbootstrap
+                    </code></p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Launch the Toolkit</h4>
+                    <p>Run the dashboard with:<br>
+                    <code style="background:#0d1117; padding:6px 10px; border-radius:6px; font-family:monospace; display:block; margin-top:6px;">
+                        python ui_dashboard.py
+                    </code></p>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-back" id="back-btn" style="display: none;">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+    </div>
+
+    <script>
+        // Simulate download progress
+        let progress = 0;
+        const progressFill = document.getElementById('progress-fill');
+        const progressPercent = document.getElementById('progress-percent');
+        const progressText = document.getElementById('progress-text');
+        const backBtn = document.getElementById('back-btn');
+
+        const messages = [
+            "Preparing files...",
+            "Connecting to repository...",
+            "Downloading source code...",
+            "Almost there...",
+            "Download complete!"
+        ];
+
+        const interval = setInterval(() => {
+            progress += Math.random() * 12 + 8; // Random speed between 8-20%
+            if (progress > 100) progress = 100;
+
+            progressFill.style.width = `${progress}%`;
+            progressPercent.textContent = `${Math.floor(progress)}%`;
+
+            // Change status text
+            const msgIndex = Math.min(Math.floor(progress / 25), messages.length - 1);
+            progressText.textContent = messages[msgIndex];
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                progressText.style.color = "#39ff14";
+                progressText.textContent = "✅ Download Complete!";
+                
+                // Show back button with delay
+                setTimeout(() => {
+                    backBtn.style.display = "inline-flex";
+                    backBtn.style.animation = "fadeInLeft 0.6s ease-out forwards";
+                }, 800);
+            }
+        }, 180); // Update every 180ms for smooth feel
+
+        // Bounce animation on icon
+        setTimeout(() => {
+            document.querySelector('.icon').style.animation = 'bounceIn 1.4s ease-out';
+        }, 300);
+    </script>
 </body>
 </html>

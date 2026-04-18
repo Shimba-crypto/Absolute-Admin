@@ -9,6 +9,12 @@ Absolute Admin is a research-oriented Windows management toolkit. It offers a mo
 * **Controlled Injection**: Educational interface for DLL injection testing.
 * **Modern UI**: Dark-themed dashboard built with `ttkbootstrap`.
 
+## Safety Disclaimer
+Educational Use Only. This software interacts with system processes and memory. It is designed for administrative research and educational purposes. While this tool includes safeguards to prevent interaction with critical OS components, users are strongly advised to test injection and termination features within a Virtual Machine (VM) to ensure system stability. The author is not responsible for any misuse or system instability caused by this software.
+
+## Contributing
+Contributions are welcome! If you find a bug or want to add a feature, please feel free to open an issue or submit a pull request.
+
 ## Installation
 
 1. **Clone the repository**:

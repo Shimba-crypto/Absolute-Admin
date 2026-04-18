@@ -13,5 +13,5 @@ Absolute Admin is a research-oriented Windows management toolkit. It offers a mo
 
 1. **Clone the repository**:
    ```bash
-   git clone [https://github.com/yourusername/Absolute-Admin.git](https://github.com/yourusername/Absolute-Admin.git)
+   git clone [https://github.com/Shimba-crypto/Absolute-Admin.git](https://github.com/Shimba-crypto/Absolute-Admin.git)
    cd Absolute-Admin

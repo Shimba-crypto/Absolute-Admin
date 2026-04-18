@@ -14,29 +14,22 @@
             --text: #c9d1d9;
             --text-secondary: #8b949e;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+       
+        * { margin:0; padding:0; box-sizing:border-box; }
+       
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'Segoe UI', system-ui, sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
         }
-
-        /* Background Grid Effect */
+       
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                linear-gradient(to right, rgba(88, 166, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+            inset: 0;
+            background: linear-gradient(to right, rgba(88,166,255,0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(88,166,255,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: -1;
@@ -50,9 +43,8 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            position: relative;
         }
-
+       
         .hero h1 {
             font-size: 4.5rem;
             font-weight: 700;
@@ -63,44 +55,59 @@
             animation: titlePop 1s ease-out forwards;
             opacity: 0;
         }
-
+       
         .hero p {
             font-size: 1.4rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 40px;
+            max-width: 620px;
+            margin-bottom: 30px;
             animation: fadeInUp 1s ease-out 0.3s forwards;
             opacity: 0;
         }
 
+        .note {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            padding: 14px 26px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+            max-width: 680px;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+            opacity: 0;
+        }
+       
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 48px;
+            padding: 18px 42px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(88,166,255,0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
-            opacity: 0;
         }
-
+       
         .btn:hover {
             transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(88, 166, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(88,166,255,0.4);
         }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
+       
         .btn::after {
             content: '';
             position: absolute;
@@ -108,14 +115,20 @@
             left: -50%;
             width: 40%;
             height: 400%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255,255,255,0.4),
-                transparent
-            );
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
             transform: skewX(-25deg);
             animation: shimmer 3s infinite;
+        }
+       
+        .btn-github {
+            background: transparent;
+            border: 2px solid #58a6ff;
+            color: #58a6ff;
+        }
+       
+        .btn-github:hover {
+            background: #58a6ff;
+            color: white;
         }
 
         .grid {
@@ -126,7 +139,7 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 28px;
         }
-
+       
         .card {
             background: var(--card);
             padding: 32px 28px;
@@ -135,15 +148,15 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             transform: translateY(40px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
-
+       
         .card:hover {
             transform: translateY(-12px);
             border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(88, 166, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(88,166,255,0.15);
         }
-
+       
         .card h3 {
             color: var(--accent);
             margin-bottom: 16px;
@@ -153,28 +166,20 @@
             gap: 12px;
         }
 
-        .card p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-        }
-
         /* Animations */
         @keyframes titlePop {
             from { opacity: 0; transform: scale(0.8) translateY(30px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes shimmer {
             0% { transform: translateX(-150%) skewX(-25deg); }
             100% { transform: translateX(400%) skewX(-25deg); }
         }
-
-        /* Staggered card animation */
+       
         .card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
         .card:nth-child(2) { animation: fadeInUp 0.8s ease-out 1s forwards; }
         .card:nth-child(3) { animation: fadeInUp 0.8s ease-out 1.2s forwards; }
@@ -184,12 +189,28 @@
     <header class="hero">
         <h1>Absolute Admin</h1>
         <p>Advanced Windows System Research &amp; Management Toolkit</p>
-        
-        <a href="https://github.com/Shimba-crypto/Absolute-Admin/archive/refs/heads/main.zip" 
-           class="btn" onclick="this.innerHTML = 'Downloading... <i class=\'fas fa-spinner fa-spin\'></i>'; setTimeout(() => window.location.href='downloaded.html', 1200)">
-            <i class="fas fa-download"></i>
-            Download Source (.zip)
-        </a>
+       
+        <div class="note">
+            <i class="fas fa-info-circle"></i>
+            <strong>Note:</strong> The full Python source code, dashboard, and crash-stopper are included inside the ZIP file.
+        </div>
+
+        <div class="buttons">
+            <a href="https://github.com/Shimba-crypto/Absolute-Admin/raw/main/Absolute_Admin_Full_Project.zip"
+               class="btn"
+               onclick="this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Downloading...'; 
+                        setTimeout(()=>{window.location.href='downloaded.html';}, 800)">
+                <i class="fas fa-download"></i>
+                Download Complete Project (ZIP)
+            </a>
+           
+            <a href="https://github.com/Shimba-crypto/Absolute-Admin" 
+               target="_blank" 
+               class="btn btn-github">
+                <i class="fab fa-github"></i>
+                View on GitHub
+            </a>
+        </div>
     </header>
 
     <div class="grid">
@@ -199,24 +220,12 @@
         </div>
         <div class="card">
             <h3><i class="fas fa-shield-alt"></i> Safety First</h3>
-            <p>The intelligent crash-stopper prevents accidental termination of critical Windows services and system processes.</p>
+            <p>Intelligent crash-stopper prevents accidental termination of critical Windows services.</p>
         </div>
         <div class="card">
             <h3><i class="fas fa-microchip"></i> Module Analysis</h3>
-            <p>Forensic-level inspection of DLLs, drivers, and executables loaded by active processes.</p>
+            <p>Forensic-level inspection of DLLs, drivers, and executables loaded by processes.</p>
         </div>
     </div>
-
-    <script>
-        // Simple scroll reveal enhancement
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.card').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.85) {
-                    card.style.opacity = '1';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

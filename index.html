@@ -3,67 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Admin</title>
+    <title>Absolute Admin | System Toolkit</title>
     <style>
+        :root {
+            --bg: #050505;
+            --surface: #111;
+            --accent: #3b82f6;
+            --text: #e5e7eb;
+            --dim: #9ca3af;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff5f6d, #ffc371);
+            background-color: var(--bg);
+            background-image: radial-gradient(#1f2937 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        .navbar {
             display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #333;
-            color: white;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .hero {
+        .container {
+            max-width: 600px;
+            padding: 3rem;
+            background: var(--surface);
+            border: 1px solid #222;
+            border-radius: 16px;
             text-align: center;
-            padding: 100px 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        p { color: var(--dim); margin-bottom: 2rem; }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--accent);
             color: white;
-            animation: fadeIn 1.5s;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 15px;
-            transition: transform 0.2s;
-        }
-        .feature-card:hover {
-            transform: scale(1.05);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div>Logo</div>
-        <div>Menu</div>
+    <div class="container">
+        <h1>Absolute Admin</h1>
+        <p>A research-oriented Windows management suite for system admins and developers.</p>
+        
+        <a href="Absolute_Admin_Full_Project.zip" 
+           target="_blank" 
+           onclick="setTimeout(function(){ window.location.href='downloaded.html'; }, 500);" 
+           class="btn">Download v1.0.0</a>
     </div>
-    <div class="hero">
-        <h1>Welcome to Absolute Admin</h1>
-        <p>Your one-stop solution for admin templates.</p>
-    </div>
-    <div class="features">
-        <h2>Features</h2>
-        <div class="feature-card">Feature 1</div>
-        <div class="feature-card">Feature 2</div>
-        <div class="feature-card">Feature 3</div>
-    </div>
-    <div class="specifications">
-        <h2>Specifications</h2>
-        <p>Details about specifications.</p>
-        <!-- Add animations for specs if needed -->
-    </div>
-    <script>
-        // Include necessary scripts for animations and interactivity
-    </script>
 </body>
 </html>
